@@ -7,11 +7,9 @@ app.use(express.json());
 app.use(cors());
 app.options('*', cors());
 
-console.log("Projeto Rodando!!!");
-
 // prerarar para responder ao GET
 app.get('/', (req, res) => {
-    res.send('✅ Servidor está on');
+    res.send('✅ Server on');
 });
 
 const port = 3000;
