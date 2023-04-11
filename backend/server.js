@@ -1,9 +1,11 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const cors = require('cors');
 
 const app = express();
-
 app.use(express.json());
+app.use(cors());
+app.options('*', cors());
 
 console.log("Projeto Rodando!!!");
 
@@ -33,7 +35,7 @@ app.post('/api/authenticate', (req, res) => {
     }
 
     let user = {
-        username: "Gustavo",
+        username: "gustavo",
         password: "12345678"
     }
 
