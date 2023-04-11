@@ -43,7 +43,7 @@ app.post('/api/authenticate', (req, res) => {
     {
         // Generate JWT TOKEN
         const token = jwt.sign({ response }, 'chave-secreta', { expiresIn: '1h' })
-    
+
         // Return success
         return res.json({ 
             status: "Success" ,
