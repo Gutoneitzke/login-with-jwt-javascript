@@ -7,7 +7,7 @@ app.use(express.json());
 app.use(cors());
 app.options('*', cors());
 
-// prerarar para responder ao GET
+// Prepare default route
 app.get('/', (req, res) => {
     res.send('✅ Server on');
 });
