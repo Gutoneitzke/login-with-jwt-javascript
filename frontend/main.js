@@ -48,7 +48,7 @@ function testJwt(){
     })
 }
 
-function cleanToken(){
+function clearToken(){
     localStorage.removeItem("securityupf")
     alert("Removed with successfully")
 }
