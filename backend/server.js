@@ -7,6 +7,8 @@ app.use(express.json());
 app.use(cors());
 app.options('*', cors());
 
+const privateKey = '188765'
+
 // Prepare default route
 app.get('/', (req, res) => {
     res.send('✅ Server on');
@@ -20,6 +22,22 @@ app.listen(port, () => {
 });
 
 // Rotas
+app.post('/api/test', (req, res) => {
+    // JWT Validation
+    const token = req.headers.authorization
+    if(!token) 
+    {
+        return res.status(401).send({ auth: false, message: 'Token não informado.' })
+    }
+    jwt.verify(token, privateKey, (err, decoded) => { 
+        if(err) 
+        {
+            return res.status(500).send({ auth: false, message: 'Invalid Token.' })
+        }
+        res.status(200).send({ auth: true, message: 'Valid Token.' })
+    }); 
+})
+
 app.post('/api/authenticate', (req, res) => {
     let response = req.body
 
@@ -29,7 +47,7 @@ app.post('/api/authenticate', (req, res) => {
         return res.json({ 
             status: "Error" ,
             message: "Incomplete data or we receive more data"
-        });
+        })
     }
 
     let user = {
@@ -40,21 +58,21 @@ app.post('/api/authenticate', (req, res) => {
     if(response.username == user.username && response.password == user.password)
     {
         // Generate JWT TOKEN
-        const token = jwt.sign({ response }, 'chave-secreta', { expiresIn: '1h' })
+        const token = jwt.sign({ response }, privateKey, { expiresIn: '1h' })
 
         // Return success
         return res.json({ 
             status: "Success" ,
-            message: "Success to make login",
+            message: "Success to make login - Now you can click in Test JWT Token Button",
             token: token
-        });
+        })
     }
     else
     {
         return res.json({ 
             status: "Error" ,
             message: "User not found"
-        });
+        })
     }
 
 });

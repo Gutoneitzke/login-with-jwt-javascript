@@ -15,8 +15,33 @@ function login(){
     })
     .then((response) => response.json())
     .then((response) => {
+        alert(response.message)
         console.log(response)
         localStorage.setItem("securityupf",response.token)
+    })
+    .catch((e) => {
+        console.log(`Error -> ${e}`)
+    })
+}
+
+function testjwt(){
+    const token = localStorage.getItem("securityupf")
+    console.log(token)
+    fetch("http://localhost:3000/api/test",{
+        method: 'POST',
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: `${token}`
+        },
+        body: JSON.stringify({
+            student: "188765"
+        })
+    })
+    .then((response) => response.json())
+    .then((response) => {
+        alert(response.message)
+        console.log(response)
     })
     .catch((e) => {
         console.log(`Error -> ${e}`)
