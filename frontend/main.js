@@ -24,7 +24,7 @@ function login(){
     })
 }
 
-function testjwt(){
+function testJwt(){
     const token = localStorage.getItem("securityupf")
     console.log(token)
     fetch("http://localhost:3000/api/test",{
@@ -46,4 +46,9 @@ function testjwt(){
     .catch((e) => {
         console.log(`Error -> ${e}`)
     })
+}
+
+function cleanToken(){
+    localStorage.removeItem("securityupf")
+    alert("Removed with successfully")
 }
